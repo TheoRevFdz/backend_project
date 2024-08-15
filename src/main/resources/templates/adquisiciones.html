@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adquisiciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+       
+        table tbody td {
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        
+        table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        
+        table tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+
+        
+        table thead {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        
+        table tbody td {
+            color: #333333;
+        }
+
+        
+        table tbody img {
+            max-width: 100px;
+            max-height: 100px;
+        }
+
+        
+        .precio-unidad {
+            font-weight: bold;
+            color: #28a745; 
+        }
+
+        
+        .subtotal-total {
+            font-weight: bold;
+            color: #dc3545; 
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/constructora}">Home</a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/constructora}">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/categoria}">Categorías</a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/carrito}">Carrito</a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/adquisiciones}">Adquisiciones</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1 class="mb-4">Adquisiciones</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th>Categoría</th>
+                    <th>Nombre de la herramienta</th>
+                    <th>Cantidad Total</th>
+                    <th>Imagen</th>
+                    <th>Precio Unidad</th>
+                    <th>Subtotal Total</th>
+                    <th>Fecha de Venta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterar sobre los resultados de la consulta -->
+                <tr th:each="adquisicion : ${adquisiciones}">
+                    <td th:text="${adquisicion.idVenta}"></td>
+                    <td th:text="${adquisicion.categoria}"></td>
+                    <td th:text="${adquisicion.nombreHerramienta}"></td>
+                    <td th:text="${adquisicion.cantidad}"></td>
+                    <td><img th:src="@{'/img/' + ${adquisicion.herramienta}}" width="100"></td>
+                    <td th:text=" 'S/. ' + ${adquisicion.precioUnidad}" class="precio-unidad"></td>
+                    <td th:text=" 'S/. ' + ${adquisicion.subtotal}" class="subtotal-total"></td>
+                    <td th:text="${adquisicion.fechaVenta}"></td>
+                </tr>
+                <!-- Mensaje si no hay adquisiciones -->
+                <tr th:if="${#lists.isEmpty(adquisiciones)}">
+                    <td colspan="8" class="text-center">No hay adquisiciones disponibles.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
