@@ -1,6 +1,5 @@
-package org.cibertec.edu.pe.controller;
+package org.cibertec.edu.pe.controllers;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +10,6 @@ import org.cibertec.edu.pe.model.Herramienta;
 import org.cibertec.edu.pe.model.Adquisicion;
 import org.cibertec.edu.pe.model.Categoria;
 import org.cibertec.edu.pe.model.Detalle;
-import org.cibertec.edu.pe.model.Venta;
 import org.cibertec.edu.pe.repository.IHerramientaRepository;
 import org.cibertec.edu.pe.services.IHerramientasService;
 import org.cibertec.edu.pe.services.IVentasSeervice;

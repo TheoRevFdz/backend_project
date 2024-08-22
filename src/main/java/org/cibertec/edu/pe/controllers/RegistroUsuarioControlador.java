@@ -1,4 +1,4 @@
-package org.cibertec.edu.pe.controller;
+package org.cibertec.edu.pe.controllers;
 
 import org.cibertec.edu.pe.dto.UsuarioRegistroDTO;
 import org.cibertec.edu.pe.services.IUsuarioService;
