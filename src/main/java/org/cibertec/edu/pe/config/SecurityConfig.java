@@ -55,7 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/auth/rols/**"
                 )
                 .permitAll()
-                .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**")
+                .antMatchers("/v2/api-docs",
+                        "/configuration/**",
+                        "/swagger*/**",
+                        "/webjars/**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

@@ -11,9 +11,9 @@ import org.cibertec.edu.pe.model.Adquisicion;
 import org.cibertec.edu.pe.model.Categoria;
 import org.cibertec.edu.pe.model.Detalle;
 import org.cibertec.edu.pe.repository.IHerramientaRepository;
+import org.cibertec.edu.pe.services.IAdquisicionService;
 import org.cibertec.edu.pe.services.IHerramientasService;
 import org.cibertec.edu.pe.services.IVentasSeervice;
-import org.cibertec.edu.pe.services.impl.AdquisicionServiceImpl;
 import org.cibertec.edu.pe.repository.ICategoriaRepository;
 import org.cibertec.edu.pe.repository.IDetalleRepository;
 import org.cibertec.edu.pe.repository.IVentaRepository;
@@ -160,12 +160,12 @@ public class HerramientaController {
     ///////////////////Adquisiciones//////////////////
 
     @Autowired
-    private AdquisicionServiceImpl adquisicionRepository;
+    private IAdquisicionService adquisicionService;
 
     @GetMapping("/adquisiciones")
     public String adquisiciones(Model model) {
         // Realizar la consulta SQL y obtener los datos
-        List<Adquisicion> adquisiciones = adquisicionRepository.obtenerAdquisiciones();
+        List<Adquisicion> adquisiciones = adquisicionService.obtenerAdquisiciones();
 
         // Agregar los resultados al modelo
         model.addAttribute("adquisiciones", adquisiciones);
