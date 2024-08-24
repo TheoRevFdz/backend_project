@@ -1,22 +1,23 @@
 package org.cibertec.edu.pe.config;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.models.ExternalDocumentation;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.ApiKey;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-import java.util.Collections;
-
-@EnableSwagger2
+//@EnableSwagger2
 @Configuration
+@SecurityScheme(
+        name = "Bearer Authentication",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
+)
 public class SwaggerConfig {
     @Value("${spring.application.name}")
     private String applicatioName;
@@ -28,8 +29,19 @@ public class SwaggerConfig {
     private String applicationVersion;
 
     @Bean
-    public Docket apiDocket() {
-        return new Docket(DocumentationType.SWAGGER_2)
+    public OpenAPI openAPI() {
+        return new OpenAPI()
+                .info(new Info().title(applicatioName)
+                        .description(applicationDescription)
+                        .version(applicationVersion)
+                        .license(new License()
+                                .name("Apache 2.0")
+                                .url("http://springdoc.org")
+                        ))
+                .externalDocs(new ExternalDocumentation()
+                        .description("SpringBoot Wiki Documentation")
+                        .url("https://springboot.wiki.github.org/docs"));
+        /*return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("org.cibertec.edu.pe.rest.controllers"))
                 .paths(PathSelectors.any())
@@ -40,11 +52,11 @@ public class SwaggerConfig {
                                 "Bearer",
                                 HttpHeaders.AUTHORIZATION,
                                 "header"
-                        )));
+                        )));*/
     }
 
 
-    private ApiInfo getApiInfo() {
+    /*private ApiInfo getApiInfo() {
         return new ApiInfo(
                 applicatioName,
                 applicationDescription,
@@ -55,5 +67,5 @@ public class SwaggerConfig {
                 "LICENSE URL",
                 Collections.emptyList()
         );
-    }
+    }*/
 }
